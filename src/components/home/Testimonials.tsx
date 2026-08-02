@@ -42,7 +42,7 @@ const duplicatedTestimonials = [
 ];
 
 export default function Testimonials() {
-  const scrollRef = useRef(null);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
   const [isHovered, setIsHovered] = useState(false);
 
   // Slow motion auto-scroll loop (60 FPS animation frame)
@@ -50,7 +50,7 @@ export default function Testimonials() {
     const scrollContainer = scrollRef.current;
     if (!scrollContainer) return;
 
-    let animationFrameId;
+    let animationFrameId: number;
 
     const autoScroll = () => {
       if (!isHovered && scrollContainer) {
@@ -70,7 +70,7 @@ export default function Testimonials() {
     return () => cancelAnimationFrame(animationFrameId);
   }, [isHovered]);
 
-  const handleManualScroll = (direction) => {
+  const handleManualScroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
       const scrollAmount = 350;
       scrollRef.current.scrollBy({
@@ -99,14 +99,14 @@ export default function Testimonials() {
             <button
               onClick={() => handleManualScroll("left")}
               aria-label="Previous"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-[#121820]/20 bg-white text-[#121820] transition hover:border-[#C59B27] hover:bg-[#C59B27] hover:text-white shadow-sm"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-[#121820]/20 bg-white text-[#121820] shadow-sm transition hover:border-[#C59B27] hover:bg-[#C59B27] hover:text-white"
             >
               <ArrowLeft size={18} />
             </button>
             <button
               onClick={() => handleManualScroll("right")}
               aria-label="Next"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-[#121820]/20 bg-white text-[#121820] transition hover:border-[#C59B27] hover:bg-[#C59B27] hover:text-white shadow-sm"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-[#121820]/20 bg-white text-[#121820] shadow-sm transition hover:border-[#C59B27] hover:bg-[#C59B27] hover:text-white"
             >
               <ArrowRight size={18} />
             </button>
@@ -118,7 +118,7 @@ export default function Testimonials() {
           ref={scrollRef}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className="flex gap-6 overflow-x-auto py-2 no-scrollbar cursor-grab active:cursor-grabbing"
+          className="no-scrollbar flex cursor-grab gap-6 overflow-x-auto py-2 active:cursor-grabbing"
           style={{
             scrollbarWidth: "none",
             msOverflowStyle: "none",

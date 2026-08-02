@@ -25,7 +25,7 @@ const clients = [
 const duplicatedClients = [...clients, ...clients, ...clients];
 
 export default function OurClients() {
-  const scrollRef = useRef(null);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
   const [isHovered, setIsHovered] = useState(false);
 
   // Smooth slow motion ticker (60 FPS animation loop)
@@ -33,7 +33,7 @@ export default function OurClients() {
     const scrollContainer = scrollRef.current;
     if (!scrollContainer) return;
 
-    let animationFrameId;
+    let animationFrameId: number;
 
     const autoScroll = () => {
       if (!isHovered && scrollContainer) {
